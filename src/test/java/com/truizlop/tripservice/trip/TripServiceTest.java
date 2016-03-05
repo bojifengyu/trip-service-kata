@@ -2,7 +2,6 @@ package com.truizlop.tripservice.trip;
 
 import com.truizlop.tripservice.exception.UserNotLoggedInException;
 import com.truizlop.tripservice.user.User;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;

@@ -16,18 +16,24 @@ public class TripService {
     }
 
     public List<Trip> getTripsByUser(User user, User loggedUser) throws UserNotLoggedInException {
+        validateUser(loggedUser);
+
+        return loggedUser.areFriends(user) ?
+                retrieveTripsByUser(user) :
+                noTrips();
+    }
+
+    private void validateUser(User loggedUser) {
         if(loggedUser == null){
             throw new UserNotLoggedInException();
         }
-
-        List<Trip> tripList = new ArrayList<>();
-        if (loggedUser.areFriends(user)) {
-            tripList = retrieveTripsByUser(user);
-        }
-        return tripList;
     }
 
-    protected List<Trip> retrieveTripsByUser(User user) {
+    private ArrayList<Trip> noTrips() {
+        return new ArrayList<>();
+    }
+
+    private List<Trip> retrieveTripsByUser(User user) {
         return tripDAO.findTripsBy(user);
     }
 
